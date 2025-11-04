@@ -47,43 +47,38 @@ DigitClassifier/
 └─ .gitignore                            # 필요시 추가
 
 
+---
 
-## ⚙️ 환경 설정
+## ⚙️ 프로젝트 설정 방법
 
 ### 1. Android Studio 설치
-- [Android Studio](https://developer.android.com/studio) 설치
-- SDK 36 이상
+- [Android Studio 공식 사이트](https://developer.android.com/studio)에서 Android Studio를 다운로드하고 설치합니다.
+- 설치 시 Kotlin과 Android SDK도 함께 설치합니다.
 
-### 2. Gradle 설정
-프로젝트는 **Kotlin DSL**(`build.gradle.kts`) 사용  
-이미 설정된 repository:
+### 2. 프로젝트 복사
+- GitHub를 사용하지 않는 경우, 프로젝트 폴더를 zip으로 공유하거나 직접 복사합니다.
+- 예를 들어, `DigitClassifier` 폴더를 원하는 위치에 저장합니다.
+
+### 3. Android Studio에서 열기
+1. Android Studio를 실행합니다.
+2. `Open an existing project`를 선택합니다.
+3. `DigitClassifier` 폴더를 선택하고 열기를 클릭합니다.
+4. Gradle이 자동으로 프로젝트를 동기화합니다. (`Sync Now` 버튼 클릭 시)
+
+### 4. Gradle 의존성 확인
+- `build.gradle.kts` 파일에서 다음과 같은 주요 의존성을 확인할 수 있습니다.
+
 ```kotlin
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url = uri("https://jitpack.io") }
-    }
-}
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://jitpack.io") }
-    }
-}
---------------------------------------------------------
-3. 의존성
-dependencies {
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
+// TensorFlow Lite
+implementation("org.tensorflow:tensorflow-lite:2.14.0")
 
-    implementation("com.github.divyanshub024:AndroidDraw:v0.1") // 손글씨 입력
+// AndroidDraw 라이브러리
+implementation("com.github.divyanshub024:AndroidDraw:v0.1")
 
-    implementation("org.tensorflow:tensorflow-lite:2.14.0")     // TFLite
-}
+// AndroidX 기본 라이브러리
+implementation(libs.androidx.core.ktx)
+implementation(libs.androidx.appcompat)
+implementation(libs.material)
+implementation(libs.androidx.constraintlayout)
+implementation(libs.androidx.navigation.fragment.ktx)
+implementation(libs.androidx.navigation.ui.ktx)
